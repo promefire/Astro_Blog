@@ -1,0 +1,41 @@
+name: Deploy Astro to CentOS 9
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. 安装依赖并构建 Astro
+      - name: Build Astro
+        run: |
+          npm install
+          npm run build  # 输出到 dist/ 目录
+
+      # 4. 通过 SSH 部署到 CentOS 服务器
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script: |
+            # 进入服务器目标目录
+            cd /var/www/blog
+            # 删除旧文件（保留需持久化的文件如 .env）
+            rm -rf !(.env|.htaccess)
+            # 同步新构建文件
+            rsync -avz --delete $GITHUB_WORKSPACE/dist/ .
