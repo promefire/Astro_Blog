@@ -21,15 +21,13 @@ jobs:
           npm run build  # 输出到 dist/
 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.1  # 更新版本号
+        uses: easingthemes/ssh-deploy@main  # 更新版本号
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
-          script: |
-            cd /www1/blog
-            shopt -s extglob  # 启用扩展模式
-            rm -rf !(.env|.htaccess)  # 保留关键配置
-            rsync -avz --delete $GITHUB_WORKSPACE/dist/ . 
-            echo "✅ 部署完成"
+          SOURCE: "dist/" 
+          TARGET: "/www1/blog/" 
+          ARGS: "-avz --chown=${REMOTE_USER}:www-data --delete"
+          EXCLUDE: ".git, .env, node_modules"  
