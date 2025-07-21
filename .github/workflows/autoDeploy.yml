@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-            cd /var/www/blog
+            cd /www1/blog
             shopt -s extglob  # 启用扩展模式
             rm -rf !(.env|.htaccess)  # 保留关键配置
             rsync -avz --delete $GITHUB_WORKSPACE/dist/ . 
