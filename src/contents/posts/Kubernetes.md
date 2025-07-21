@@ -1,8 +1,7 @@
 ---
 title: Kubernetes
 published: 2025-07-4 16:00:00
-categories:
-  - [后端开发]
+category: 后端学习
 tags:
   - 容器
 cover: https://img.promefire.top/blog-img/2025/07/0848d25fd97ab38bc3a54fbc168b17b2.png

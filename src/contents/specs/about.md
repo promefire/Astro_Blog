@@ -1,5 +1,33 @@
-# Special thanks to:
+24岁代码搬运工一枚
 
-- [Hexo Shoka theme](https://github.com/amehime/hexo-theme-shoka) for providing design inspiration
+“桥边红药” 出自宋代姜夔的《[扬州慢·淮左名都](https://so.gushiwen.cn/shiwenv_a8062138a414.aspx)》，“念桥边红药，年年知为谁生？”
 
-- [Astro Fuwari template](https://github.com/saicaca/fuwari) for providing the main design concept and part of the implementation
+“`Promefire` ” 则是普罗米修斯(Prometheus)和火(fire)的组合
+
+## 个人简介
+
+* 爱好科幻，钟爱《真名实姓》、《六道轮回》、阿西莫夫《机器人》系列，也喜欢加入喜剧元素的《银河系漫游指南》，对大刘很多本可以写成长篇却只有短篇的小说创意表示惋惜，讨厌披着科幻外衣的伪科幻。对《时空画师》获雨果奖表示不服
+* 看美剧，《神秘博士》、《邪恶力量》、《星际之门》、《危机边缘》、《发现号》前两季、《苍穹浩瀚》都爱看
+* 伪文青
+* 科研废物，科研是一种折磨
+* 一个还没有脱离低级趣味的人
+* 对游戏开发感兴趣，如果有空余时间，我想做一个完整的剧情向游戏
+* 手残党，一切需要吃操作的游戏都玩不来
+* 不爱运动 (克服中……)
+* 路痴，分不清方向，出门必带导航
+* 熬夜与早睡反复挣扎型选手
+* 记性不好，决定向Metal-Cell学习，多记录
+* 有一个公众号，发一些随笔，但已经很久没更新了
+
+
+
+
+
+
+
+
+
+
+
+
+
