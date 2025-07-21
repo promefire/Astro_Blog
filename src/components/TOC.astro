@@ -1,0 +1,122 @@
+---
+// 目录组件 - 自动提取文章标题生成目录
+const { selector = ".article" } = Astro.props;
+---
+
+<nav id="toc" class="toc-container">
+  <div class="toc-header">
+    <h3 class="toc-title">目录</h3>
+  </div>
+  <div class="toc-content" id="toc-content">
+    <!-- 目录内容将通过JS动态生成 -->
+  </div>
+</nav>
+
+<script>
+  // 等待页面加载完成后生成目录
+  document.addEventListener('DOMContentLoaded', () => {
+    const content = document.querySelector('{selector}');
+    if (!content) return;
+    
+    const headers = content.querySelectorAll('h2, h3, h4');
+    const tocContent = document.getElementById('toc-content');
+    if (!tocContent || headers.length === 0) return;
+    
+    // 隐藏目录容器如果没有标题
+    if (headers.length === 0) {
+      const tocElement = document.getElementById('toc');
+      if (tocElement) {
+        tocElement.style.display = 'none';
+      }
+      return;
+    }
+    
+    let html = '<ul class="toc-list">';
+    headers.forEach((header, index) => {
+      // 为没有id的标题生成id
+      if (!header.id) {
+        header.id = `heading-${index}`;
+      }
+      
+      const level = header.tagName.toLowerCase();
+      const text = header.textContent?.trim() || '';
+      
+      html += `
+        <li class="toc-item toc-${level}">
+          <a href="#${header.id}" class="toc-link" data-level="${level}">
+            ${text}
+          </a>
+        </li>
+      `;
+    });
+    html += '</ul>';
+    
+    tocContent.innerHTML = html;
+    
+    // 添加平滑滚动
+    const tocLinks = tocContent.querySelectorAll('.toc-link');
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .toc-container {
+    @apply mb-6 rounded-lg border border-[var(--border-color)] bg-[var(--card-color)] p-4;
+    position: sticky;
+    top: 2rem;
+  }
+  
+  .toc-header {
+    @apply mb-3 border-b border-[var(--border-color)] pb-2;
+  }
+  
+  .toc-title {
+    @apply text-lg font-semibold text-[var(--text-color)];
+    margin: 0;
+  }
+  
+  .toc-list {
+    @apply list-none p-0 m-0;
+  }
+  
+  .toc-item {
+    @apply mb-1;
+  }
+  
+  .toc-link {
+    @apply block py-1 px-2 rounded text-[var(--text-color-lighten)] no-underline transition-all;
+    @apply hover:bg-[var(--primary-color-lighten)] hover:text-[var(--primary-color)];
+  }
+  
+  .toc-h2 {
+    @apply ml-0;
+  }
+  
+  .toc-h3 {
+    @apply ml-4;
+  }
+  
+  .toc-h4 {
+    @apply ml-8;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .toc-container {
+      position: static;
+      margin-bottom: 1rem;
+    }
+  }
+</style>

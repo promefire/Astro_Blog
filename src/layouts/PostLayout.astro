@@ -2,6 +2,7 @@
 import Main from "../layouts/MainLayout.astro";
 import Markdown from "../components/Markdown.astro";
 import CopyRight from "../components/misc/CopyRight.astro";
+// import TOC from "../components/TOC.astro";
 
 interface Props {
   title?: string;
@@ -28,9 +29,9 @@ const {
 ---
 
 <Main title={title} subTitle={subTitle} bannerImage={bannerImage}>
-  <!-- <Fragment set:html={tocHTMLString} /> -->
   <div class="article-wrapper">
     <div class="article">
+      <!-- <TOC selector=".article" /> -->
       <Markdown>
         <slot />
       </Markdown>
