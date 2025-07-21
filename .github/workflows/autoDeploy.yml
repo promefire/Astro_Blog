@@ -23,10 +23,10 @@ jobs:
       - name: Deploy via SSH
         uses: easingthemes/ssh-deploy@main  # 更新版本号
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT || 22 }}
           SOURCE: "dist/" 
           TARGET: "/www1/blog/" 
           ARGS: "-avz --chown=${REMOTE_USER}:www-data --delete"
