@@ -1,42 +1,35 @@
 name: Deploy Astro to CentOS 9
-
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
-
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-
       - name: Build Astro
         run: |
           npm install
-          npm run build  # 输出到 dist/ 目录
+          npm run build  # 输出到 dist/
 
- 
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.7
+        uses: appleboy/ssh-action@v1.2.1  # 更新版本号
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT || 22 }}
           script: |
-
             cd /var/www/blog
-
-            rm -rf !(.env|.htaccess)
-
-            rsync -avz --delete $GITHUB_WORKSPACE/dist/ .
+            shopt -s extglob  # 启用扩展模式
+            rm -rf !(.env|.htaccess)  # 保留关键配置
+            rsync -avz --delete $GITHUB_WORKSPACE/dist/ . 
+            echo "✅ 部署完成"
