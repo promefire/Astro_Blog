@@ -3,11 +3,13 @@ import { getCollection } from "astro:content";
 import { IdToSlug } from "../../utils/hash";
 import PostLayout from "../../layouts/PostLayout.astro";
 import { render } from "astro:content";
+import { toPinyin } from "../../utils/pinyin";
 
 export async function getStaticPaths() {
   const postEntries = await getCollection("posts");
   return postEntries.map((entry) => ({
     params: { slug: IdToSlug(entry.id) },
+    // params: { slug: toPinyin(entry.data.title) },
     props: { entry },
   }));
 }

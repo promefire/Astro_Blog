@@ -17,9 +17,35 @@ description: git常用命令
 
 ## 配置ssh
 
-![img](https://img.promefire.top/blog-img/20240621-77f6748dcf581320c96dbc42f608639f.png)
+### github添加密钥
 
+```
+git config --global user.name "xxxxxxx"
+git config --global user.email "xxxxxx@qq.com"
+ssh-keygen -t rsa -C "xxxxxxx@qq.com"
+```
 
+完成后会在提示的路径下生成两个文件`id_rsa`和`id_rsa.pub`前者是私钥，后者公钥，
+
+查看公钥内容
+
+```shell
+cat /root/.ssh/id_rsa.pub
+```
+
+复制内容，在github中点击右上角头像，依次打开"Setting"--“SSH and GPG keys”--"New SSH Key" 粘贴
+
+如果还不行，配置本地`~/.ssh/config` 文件，添加如下内容：
+
+```
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
+    IdentityFile ~/.ssh/id_ed25519  # 替换为你的密钥路径
+```
+
+保存后尝试`ssh -T git@github.com` 
 
 ## 工作流程
 

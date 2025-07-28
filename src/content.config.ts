@@ -1,6 +1,8 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+
+
 const posts = defineCollection({
   loader: glob({
     pattern: "**/*.md",
@@ -19,6 +21,7 @@ const posts = defineCollection({
     licenseName: z.string().optional(),
     licenseUrl: z.string().optional(),
   }),
+
 });
 
 const specs = defineCollection({
