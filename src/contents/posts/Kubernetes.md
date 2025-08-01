@@ -1,9 +1,9 @@
 ---
 title: Kubernetes
 published: 2025-07-4 16:00:00
-category: 后端学习
+category: 云原生
 tags:
-  - 容器
+  - k8s
 cover: https://img.promefire.top/blog-img/2025/07/0848d25fd97ab38bc3a54fbc168b17b2.png
 description: 比Docker更高一级
 ---

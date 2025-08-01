@@ -77,7 +77,35 @@ sudo systemctl status docker
 
 **image 文件生成的容器实例，本身也是一个文件，称为容器文件。**也就是说，一旦容器生成，就会同时存在两个文件： image 文件和容器文件。而且关闭容器并不会删除容器文件，只是容器停止运行而已。
 
+## 添加镜像源
 
+DockersHub国内镜像加速源列表https://github.com/dongyubin/DockerHub
+
+编辑 `/etc/docker/daemon.json` 
+
+```
+{
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com"
+  ]
+}
+```
+
+* 注意要加前面的`https://` 
+
+重启服务：
+
+```
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+报错的话查看详细日志
+
+```bash
+sudo journalctl -u docker.service --since "5 minutes ago" -n 50 --no-pager
+```
 
 
 
@@ -155,9 +183,37 @@ docker exec -it redis-server bash
 
 
 
-
-
 > 有个特别需要注意的点：开启多个docker容器会造成很大的性能消耗，我在阿里云学生机启动三个docker就会直接死机/(ㄒoㄒ)/~~
+
+
+
+
+
+## docker-compose
+
+在有`docker-compose.yml` 的文件目录下执行
+
+```bash
+docker-compose up -d 
+```
+
+* `-d` ：后台运行
+
+创建容器后，查看日志
+
+```
+docker-compose logs -f
+```
+
+常用命令：
+
+| `docker-compose up -d`   | 创建并启动容器（后台运行）            |
+| ------------------------ | ------------------------------------- |
+| `docker-compose ps`      | 查看运行中的容器状态                  |
+| `docker-compose logs`    | 查看容器日志                          |
+| `docker-compose stop`    | 停止容器（保留数据）                  |
+| `docker-compose down`    | **停止并删除容器+网络**（谨慎使用！） |
+| `docker-compose restart` | 重启容器                              |
 
 
 
