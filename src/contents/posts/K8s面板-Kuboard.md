@@ -60,8 +60,6 @@ subjects:
 EOF
 ```
 
-
-
 ## 获取 **API Server 地址和Token**
 
 **1、获取 API Server 地址（将导致** `**TLS handshake**` **错误的地方）** 我们必须获取 Minikube 容器在 Docker 网络内部的真实 IP 地址。
@@ -80,9 +78,9 @@ kubectl cluster-info
 **API Server = https://192.168.49.2:8443**
 ```
 
-**不要使用**`**kubectl proxy**`**启动！！！会报错**`**TLS handshake**` **，tmd还得是gemini找到了解决办法，deepkseek就是垃圾！**
+<font color="#dd0000">**不要使用**`kubectl proxy`启动！！！会报错 `TLS handshake`  </font>tmd还得是gemini找到了解决办法，deepkseek就是垃圾！**
 
-- **错误做法**：使用 `kubectl proxy` 启动一个代理，然后用 `http://宿主机IP:8001` 作为 API Server 地址。
+- **错误做法**：使用 `kubectl proxy` 启动一个代理，把集群的8443端口转发到宿主机的8001，然后用 `http://宿主机IP:8001` 作为 API Server 地址。
 - **为什么错**：`kubectl proxy` 提供的是一个**非加密的 HTTP** 服务。而 Kuboard 默认会使用**加密的 HTTPS** 协议去连接，协议不匹配导致了 `tls: first record does not look like a TLS handshake` 错误。
 - **正确做法**：始终直接连接 Minikube 暴露的、原生的、加密的 HTTPS API Server 地址。
 
@@ -114,9 +112,7 @@ docker run -d \
 - `-p 8082:80/tcp`: kubectl前端页面映射到宿主机的8082端口
 - `-p 10082:10081/tcp`： Kuboard Agent Server 监听的**TCP端口**，用于集群 Agent 的反向连接  （还用不到）
 
- 
-
-!! 要添加` --network=minikube`参数。
+ <font color="#dd0000">!! 要添加` --network=minikube`参数。</font>
 
 我们的kuboard和minikube集群都是docker启动的，按照默认启动的话会分属于两个网络，导致kuboard无法连接到minikube的api Server地址。
 
