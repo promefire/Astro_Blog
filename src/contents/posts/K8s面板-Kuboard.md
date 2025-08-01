@@ -126,9 +126,26 @@ docker network ls
 
  在浏览器中打开 Kuboard 界面：`http://<宿主机IP>:8082`，添加集群，填写上面获得的`API Server`和`Token`。成功！
 
-![img](https://img.promefire.top/blog-img/2025/07/kuboard成功截图.webp)
-
-
+<div style="text-align: center;">
+  <img 
+    src="https://img.promefire.top/blog-img/2025/07/kuboard成功截图.webp" 
+    style="
+      width: 90%; 
+      max-width: 1200px;
+      height: auto; 
+      display: block;
+      margin: 0 auto 10px;  /* 底部留出图注空间 */
+      object-fit: cover;
+  ">
+  <p style="
+      font-size: 0.9em; 
+      color: #666; 
+      margin-top: 0; 
+      font-family: sans-serif;
+  ">
+    kuboard添加集群
+  </p>
+</div>
 
 
 
