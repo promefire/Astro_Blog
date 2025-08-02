@@ -70,7 +70,7 @@ export async function GetSortedPosts() {
  *
  * @returns A promise that resolves to a map of archives grouped by year.
  */
-export async function GetArchives() {
+export async function GetArchiveMap() {
   const allBlogPosts = await getCollection("post", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
