@@ -81,7 +81,7 @@ const YukinaConfig: Configuration = {
     repoId: "R_kgDOJnPF5g",
     category: "Announcements",
     categoryId: "DIC_kwDOJnPF5s4CbscM",
-    mapping: "url",
+    mapping: "pathname",
     strict: "0",
     reactionsEnabled: "1",
     emitMetadata: "0",
