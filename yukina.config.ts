@@ -64,7 +64,7 @@ const YukinaConfig: Configuration = {
     "https://s2.loli.net/2025/01/25/JjpLOW8VSmufzlA.webp",
   ],
 
-  slugMode: "HASH", // 'RAW' | 'HASH'
+  slugMode: "PINYIN", // 'RAW' | 'HASH' | 'PINYIN'
 
   license: {
     name: "CC BY-NC-SA 4.0",
